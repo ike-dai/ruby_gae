@@ -1,0 +1,6 @@
+<html>
+  <title>showページ</title>
+  <h1>結果</h1>
+  <font color=red><%= @test %></font>
+</html>
+

@@ -1,0 +1,12 @@
+<html>
+  <title>showページ</title>
+  <h1>結果</h1>
+  <%= @voter_name %>さんの投票結果<br>
+  <font color=red><%= @result %></font>
+
+  <h2>投票者一覧</h2>
+  <% Voters.all.each do |voter| %>
+    <%= voter.name %>
+  <% end %>  
+</html>
+

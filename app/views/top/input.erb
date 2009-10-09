@@ -1,0 +1,18 @@
+<html>
+  <title>入力ページ</title>
+  <h1>アンケート</h1>
+  <% form_tag :action => 'result' do %>
+    名前：<%= text_field("data","name") %>
+
+    <br>
+    <br>
+    好きな言語は?
+    <br>
+    Ruby: <%= radio_button("data","category","rails") %><br>
+    Java: <%= radio_button("data","category","java") %><br>
+    C: <%= radio_button("data","category","c") %><br>
+    Python: <%= radio_button("data","category","python") %><br>
+    <%= submit_tag '投票' %>
+  <% end %>
+
+</html>
