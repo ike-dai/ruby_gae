@@ -1,0 +1,20 @@
+<html>
+  <title>ユーザ一覧</title>
+  <h1>登録ユーザ一覧</h1>
+  <%= link_to('新規ユーザ登録',:controller => 'admin', :action => 'new') %>
+  <br>
+  <table bgcolor='skyblue' border=2 bordercolor='silver'>
+      <tr>
+        <td>ユーザID</td>
+        <td>名前</td>
+      </tr>
+
+    <% Users.all.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.name %></td>
+      </tr>
+    <% end %>
+  </table>
+</html>
+

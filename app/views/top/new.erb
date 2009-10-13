@@ -1,0 +1,66 @@
+<html>
+  <title>新規飲み会開催登録</title>
+  <%= javascript_include_tag "prototype" %>
+
+  <h1>飲み会登録</h1>
+  <br>
+  <% form_tag :action => 'add' do %>
+    飲み会名:<%= text_field('party','party_name') %>
+    <br>
+    <table border=2>
+      <tr>
+        <td>参加メンバー</td>
+        <td>候補日</td>
+      </tr>
+      <tr>
+        <td>
+          <table border=5>
+          <% for member in Users.all %>
+            <tr>
+              <td><%= check_box_tag('members[]', member.name, false ) %></td>
+              <td><%= member.name %></td>
+            </tr>
+          <% end %>
+          </table>
+        </td>
+        <td>
+        <% def increment_count
+        @i = @i + 1
+        p @i + "test"
+           end
+        %>
+
+        <div id="candidate_div">
+    
+        <% @i = 1
+           name = 'candidates' + @i.to_s
+         %> 
+        <%= link_to_remote("候補日追加",
+            :update => "candidate_div",
+            :url => { :action => :add_candidate, :count => @i },
+            :position => "after",
+            :complete => "increment_count"
+                          )              
+        %>
+        <%= datetime_select('name','time',
+                            { :start_year => Time.now.year,
+                              :end_year => Time.now.year+2,
+                              :use_month_numbers => true,
+                              :minute_steps => 15}
+                            )
+        %>
+        <%= #datetime_select('candidates2','time',
+            #                { :start_year => Time.now.year,
+            #                  :end_year => Time.now.year+2,
+            #                  :use_month_numbers => true,
+            #                  :minute_steps => 15}
+            #                )
+        %>
+
+        </div>
+        </td>
+      </tr>
+    </table> 
+     <%= submit_tag '追加' %>
+  <% end %>
+</html>  

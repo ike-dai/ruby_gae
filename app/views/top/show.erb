@@ -1,0 +1,22 @@
+<html>
+  <title>飲み会調整アプリ</title>
+  <h1>飲み会調整</h1>
+  <%= link_to('飲み会新規開催', :action => 'new') %>
+  <br>
+  <h2>調整中の飲み会一覧</h2>
+  <table bordercolor="black">
+    <tr>
+      <td>飲み会タイトル</td>
+      <td>場所</td>
+      <td>詳細情報</td>
+    </tr>
+
+    <% Parties.all.each do |party| %>
+      <tr>
+        <td><%= party.name %></td>
+        <td><%= party.place %></td>
+        <td><%= link_to('詳細', :action => 'show_detail') %></td>
+      </tr>
+    <% end %>
+  </table>
+</html>
