@@ -1,6 +1,12 @@
 <html>
   <title>テスト</title>
-  <%= @members %>
+  <% Parties.all.each do |party|
+    p party.name
+    p "<br>"
+    p party.comment
+    end
+%>
+
   <br>
   <%= @days %>
 

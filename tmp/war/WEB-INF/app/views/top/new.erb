@@ -2,6 +2,12 @@
   <title>新規飲み会開催登録</title>
   <%= javascript_include_tag "prototype" %>
 
+  <script type="text/javascripts">
+    function countUp() {
+      ++@i;
+    }
+  </script>
+
   <h1>飲み会登録</h1>
   <br>
   <% form_tag :action => 'add' do %>
@@ -24,31 +30,30 @@
           </table>
         </td>
         <td>
-        <% def increment_count
-        @i = @i + 1
-        p @i + "test"
-           end
-        %>
 
         <div id="candidate_div">
     
-        <% @i = 1
-           name = 'candidates' + @i.to_s
+          <% 
+           name = 'candidates0'
          %> 
-        <%= link_to_remote("候補日追加",
-            :update => "candidate_div",
-            :url => { :action => :add_candidate, :count => @i },
-            :position => "after",
-            :complete => "increment_count"
-                          )              
-        %>
-        <%= datetime_select('name','time',
+        <br>
+        <%= datetime_select("#{name}",'time',
                             { :start_year => Time.now.year,
                               :end_year => Time.now.year+2,
                               :use_month_numbers => true,
                               :minute_steps => 15}
                             )
+       %>                     
+       <br>
+       <%= link_to_remote("候補日追加",
+            :update => "candidate_div",
+            :url => { :action => :add_candidate, :count => $i },
+            :position => "before",
+#            :complete => "increment_count"
+            :complete => "countUp()" 
+                          )              
         %>
+        
         <%= #datetime_select('candidates2','time',
             #                { :start_year => Time.now.year,
             #                  :end_year => Time.now.year+2,

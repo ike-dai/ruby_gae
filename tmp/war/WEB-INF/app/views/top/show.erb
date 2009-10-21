@@ -14,7 +14,7 @@
     <% Parties.all.each do |party| %>
       <tr>
         <td><%= party.name %></td>
-        <td><%= party.place %></td>
+        <td><%= party.comment %></td>
         <td><%= link_to('詳細', :action => 'show_detail') %></td>
       </tr>
     <% end %>
