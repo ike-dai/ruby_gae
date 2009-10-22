@@ -19,7 +19,7 @@
 
 class Parties
   include Bumble
-  ds :name, :comment
+  ds :name, :place
   has_many :weights, Weights, :party_id
   has_many :candidates, Candidates, :party_id
 end

@@ -1,0 +1,19 @@
+<html>
+  <title>飲み会調整アプリ</title>
+  <h1>候補日詳細</h1>
+  <%= link_to('候補日一覧に戻る', :action => 'show') %>
+  <br>
+  <table bordercolor="black">
+    <tr>
+      <td>日時</td>
+      <td>出欠状況</td>
+    </tr>
+
+    <% @candidates.each do |candidate| %>
+      <tr>
+        <td><%= candidate.year %>/<%= candidate.month %>/<%= candidate.day %> <%= candidate.hour %>:<%= candidate.minutes %> </td>
+        <td></td>
+      </tr>
+    <% end %>
+  </table>
+</html>
