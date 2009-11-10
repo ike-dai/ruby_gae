@@ -70,13 +70,16 @@ class TopController < ApplicationController
   end
 
   def show_detail
-    @party = params[:party_id]
-    p @party
-    #@candidates = Candidates.all({:party_id => @party.id}, :order => 'party_id')
-    @candidates = Candidates.all()
-    p "@@@@@@@@@@@@@@@@@@@@@@@@"
-    p @candidates
-    p "@@@@@@@@@@@@@@@@@@@@@@@@"
+    @candidates = Candidates.all({:party_id => params[:party_id].to_i})
+    @participates = Participates.all({:candidate_id => @candidates.first.key})
+    #    p @candidates
+ #   p @candidates.first.participates
+  #  test = 104
+    #@participates = Participates.all({:candidate_id => @candidates.first.})
+    #@participates = @candidates.first.participates
+   # @participates = Participates.all({:candidate_id => test})
+   # p @participates
+    #p Participates.all
   end
 #Ajax処理
   def add_candidate
@@ -96,4 +99,28 @@ class TopController < ApplicationController
     Voters.create(:name => @voter_name, :result => @result ).save!
     render :action => "result"
   end
+#Ajax処理
+  def yes
+    p params[:id]
+    Participates.all().each do |participate|
+      if participate.key == params[:id]
+        p "test"
+        participate.participation = 1
+        participate.save!
+      end
+    end
+    render :text => CGI.escapeHTML("OK")
+  end
+#Ajax処理
+  def no
+    Participates.all().each do |participate|
+      if participate.key == params[:id]
+        participate.participation = 2
+        participate.save!
+      end
+    end
+
+    render :text => CGI.escapeHTML("NG")
+  end
+
 end
