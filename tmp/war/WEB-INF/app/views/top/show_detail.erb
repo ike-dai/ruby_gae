@@ -15,7 +15,8 @@
     <% @candidates.each do |candidate| %>
       <tr>
         <td><%= candidate.year %>/<%= candidate.month %>/<%= candidate.day %> <%= candidate.hour %>:<%= candidate.minutes %> </td>
-        <% @participates.each do |participate| %>
+        <% participates = Participates.all({:candidate_id => candidate.key}) 
+          participates.each do |participate| %>
           <td><div id="yes_or_no_<%=candidate.key%>_<%=participate.key%>"><%= participate.yes_or_no%></div><br>
             <%= link_to_remote( "yes",
                 :update => "yes_or_no_#{candidate.key}_#{participate.key}",

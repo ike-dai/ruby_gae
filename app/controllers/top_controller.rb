@@ -103,7 +103,7 @@ class TopController < ApplicationController
   def yes
     p params[:id]
     Participates.all().each do |participate|
-      if participate.key == params[:id]
+      if participate.key == params[:id].to_i
         p "test"
         participate.participation = 1
         participate.save!
@@ -114,7 +114,7 @@ class TopController < ApplicationController
 #Ajax処理
   def no
     Participates.all().each do |participate|
-      if participate.key == params[:id]
+      if participate.key == params[:id].to_i
         participate.participation = 2
         participate.save!
       end
