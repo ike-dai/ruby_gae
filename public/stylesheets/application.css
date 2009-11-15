@@ -1,0 +1,46 @@
+table.table_list {
+    margin-top: 0.2em;
+    margin-bottom: 1em;
+    width: 570px;
+    border-collapse: separate;
+    border-spacing: 2px;
+    font-size: 100%;
+}
+
+table.table_list th,
+table.table001 td {
+    padding: 4px 6px;
+}
+
+table.table_list th {
+    background: #1B3AB4;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 92%;
+    color: #FFF;
+}
+
+table.table_list th.name {
+    background: #C1FFC1;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 92%;
+    color: #000;
+}
+
+table.table_list td {
+    background: #F0FFFF;
+    text-align: center;
+    white-space: nowrap;  
+}
+
+table.table_list td.high {
+    background: #FFFAF0;
+    text-align: center;
+    white-space: nowrap;  
+}
+#weight_high {
+  background: #1B3AB4;
+}
+
+

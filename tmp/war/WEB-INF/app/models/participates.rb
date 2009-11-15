@@ -68,9 +68,9 @@ class Participates
     if self.participation == 0
       "-"
     elsif self.participation == 1
-      "OK"
+      "<font color='red' size='+2'>OK</font>"
     else
-      "NG"
+      "<font color='blue' size='+2'>NG</font>"
     end
   end
 end

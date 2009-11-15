@@ -19,6 +19,7 @@
             <tr>
               <td><%= check_box_tag('members[]', member.name, false ) %></td>
               <td><%= member.name %></td>
+              <td>重要!<%= check_box_tag('weights[]', member.name, false ) %></td>
             </tr>
           <% end %>
           </table>
@@ -27,9 +28,7 @@
 
         <div id="candidate_div">
     
-          <% 
-           name = 'candidates0'
-         %> 
+          <% name = 'candidates0' %> 
         <br>
         <%= datetime_select("#{name}",'time',
                             { :start_year => Time.now.year,

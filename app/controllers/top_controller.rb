@@ -2,6 +2,7 @@ require 'cgi/session'
 
 class TopController < ApplicationController
   $i = 1
+  WEIGHT_POINT = 5
   def list
     render :action => "list"
   end
@@ -19,28 +20,19 @@ class TopController < ApplicationController
     party = Parties.create(:name => params[:party][:party_name], :place => "test")
     j = 0
     candidate_num = 'candidates' + j.to_s
-#    while true
-#      p "+++++++++++++++++++++"
-#      p params['candidate_num']
       params.each_pair{|key,value|
-#        p "keyの値"
-##        p key
-#        p "paramsの値"
-#        p value
-#        hoge = params["candidates0"]
-#        p hoge["time(2i)"]
-#        p params["key"]["time(1i)"]
-#        p params["candidates0"]["time(2i)"]
-#        p params["candidates1"]["time(2i)"]
-        #  p value["time(2i)"]
         if /^candidates/ =~ key
-#        p params["key"]
-#        p value["time(2i)"].to_i
           candidate = Candidates.create(:party => party, :year => value["time(1i)"].to_i, :month => value["time(2i)"].to_i, :day => value["time(3i)"].to_i, :hour => value["time(4i)"].to_i, :minutes => value["time(5i)"].to_i, :point => 0)   
           params[:members].each do |member|
             user = Users.all(:name => member).first
             Participates.create(:user => user, :candidate => candidate, :participation => 0)
-            Weights.create(:user => user, :party => party, :weight => 0, :admin => 0)
+            params[:weights].each do |weight|
+              if member == weight
+                Weights.create(:user => user, :party => party, :weight => WEIGHT_POINT, :admin => 0)
+              else
+                Weights.create(:user => user, :party => party, :weight => 1, :admin => 0)
+              end
+            end
           end
         end
 #        p candidate      
@@ -81,6 +73,23 @@ class TopController < ApplicationController
    # p @participates
     #p Participates.all
   end
+  def party_delete
+    p params[:party_id]
+#    p Parties.get(params[:party_id].to_i)
+    Parties.all().each do |party|
+      if party.key == params[:party_id].to_i
+        p "hoge"
+        p party
+        #Parties.all().first.delete!
+        party.delete!
+      end
+      p "aaaa"
+      p party
+    end
+    #params[:party_id].delete!
+   # flash[:message] = "削除完了!"
+    redirect_to :action => "show", :params => {:message => "削除完了!"}
+  end
 #Ajax処理
   def add_candidate
     name = 'candidates' + $i.to_s
@@ -109,7 +118,8 @@ class TopController < ApplicationController
         participate.save!
       end
     end
-    render :text => CGI.escapeHTML("OK")
+   # render :text => CGI.escapeHTML("<font color='red' size='+2'>OK</font>")
+    render :text => ("<font color='red' size='+2'>OK</font>")
   end
 #Ajax処理
   def no
@@ -120,7 +130,8 @@ class TopController < ApplicationController
       end
     end
 
-    render :text => CGI.escapeHTML("NG")
+    #render :text => CGI.escapeHTML("<font color='blue' size='+2'>NG</font>")
+    render :text => "<font color='blue' size='+2'>NG</font>"
   end
 
 end
