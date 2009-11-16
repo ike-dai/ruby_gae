@@ -8,6 +8,7 @@
   <table class="table_list">
     <tr>
       <th>日時</th>
+      <th>参加可能者数</th>
       <% @participates.each do |participate| %>
         <th class=name><%= participate.get_name %></th>
       <% end %>
@@ -16,8 +17,12 @@
     <% @candidates.each do |candidate| %>
       <tr>
         <td><%= candidate.year %>/<%= candidate.month %>/<%= candidate.day %> <%= candidate.hour %>:<%= candidate.minutes %> </td>
-        <% participates = Participates.all({:candidate_id => candidate.key}) 
-        participates.each do |participate| %>
+        <% participates = Participates.all({:candidate_id => candidate.key})%>
+        <td><% candidate.count(participates).each do |i| %>
+              <%= i %><br>
+             <% end %>
+          </td>
+        <% participates.each do |participate| %>
           <% if Weights.all({:user_id => participate.user_id ,:party_id => candidate.party_id}).first.weight != 1 %>
             <td class=high>
           <% else %>

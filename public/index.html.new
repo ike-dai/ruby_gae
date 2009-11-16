@@ -1,0 +1,8 @@
+<html>
+  <title>飲み会調整アプリ</title>
+    <body>
+      <h1><a href="http://192.168.11.128:8080/top/show">飲み会調整アプリ</a></h1>
+      <h2><a href="http://192.168.11.128:8080/admin/show">ユーザ管理ページ</a></h2>
+    </body>
+  </html>
+

@@ -1,9 +1,14 @@
 <html>
+  <%= stylesheet_link_tag "application.css" %> 
   <title>新規飲み会開催登録</title>
   <%= javascript_include_tag "prototype" %>
-
   <h1>飲み会登録</h1>
   <br>
+  <div id=error>
+    <% if params[:message] %>
+      <%= params[:message] %>
+    <% end %>
+  </div>
   <% form_tag :action => 'add' do %>
     飲み会名:<%= text_field('party','party_name') %>
     <br>

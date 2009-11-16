@@ -1,12 +1,13 @@
 <html>
+  <%= stylesheet_link_tag "application.css" %>
   <title>ユーザ一覧</title>
   <h1>登録ユーザ一覧</h1>
   <%= link_to('新規ユーザ登録',:controller => 'admin', :action => 'new') %>
   <br>
-  <table bgcolor='skyblue' border=2 bordercolor='silver'>
+  <table class=table_list>
       <tr>
-        <td>ユーザID</td>
-        <td>名前</td>
+        <th>ユーザID</th>
+        <th>名前</th>
       </tr>
 
     <% Users.all.each do |user| %>

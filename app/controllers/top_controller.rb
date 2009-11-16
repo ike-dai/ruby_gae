@@ -12,53 +12,35 @@ class TopController < ApplicationController
   end
 
   def add    
-    @members = params[:members].first
-#    p params[:candidates0]["time(2i)"].to_i
-#    p params[:candidates1]["time(1i)"].to_i
-#    p params[:candidates3]
-#    p params[:candidates4]
-    party = Parties.create(:name => params[:party][:party_name], :place => "test")
-    j = 0
-    candidate_num = 'candidates' + j.to_s
+    if params[:members].blank? or params[:party][:party_name].blank?
+      redirect_to :action => "new", :params => {:message => "正しく入力してください!"}
+    else
+      @members = params[:members].first
+      party = Parties.create(:name => params[:party][:party_name], :place => "test")
+      j = 0
+      candidate_num = 'candidates' + j.to_s
       params.each_pair{|key,value|
         if /^candidates/ =~ key
           candidate = Candidates.create(:party => party, :year => value["time(1i)"].to_i, :month => value["time(2i)"].to_i, :day => value["time(3i)"].to_i, :hour => value["time(4i)"].to_i, :minutes => value["time(5i)"].to_i, :point => 0)   
           params[:members].each do |member|
             user = Users.all(:name => member).first
             Participates.create(:user => user, :candidate => candidate, :participation => 0)
-            params[:weights].each do |weight|
-              if member == weight
-                Weights.create(:user => user, :party => party, :weight => WEIGHT_POINT, :admin => 0)
-              else
-                Weights.create(:user => user, :party => party, :weight => 1, :admin => 0)
+            unless params[:weights].blank?
+              params[:weights].each do |weight|
+                if member == weight
+                  Weights.create(:user => user, :party => party, :weight => WEIGHT_POINT, :admin => 0)
+                else
+                  Weights.create(:user => user, :party => party, :weight => 1, :admin => 0)
+                end
               end
+            else
+              Weights.create(:user => user, :party => party, :weight => 1, :admin => 0)
             end
           end
         end
-#        p candidate      
-        #       value.each_pair{|key2,value2|
- #        p key2
- #         p value2
- #       }
-
-      
-#      if params["candidate_num"]
-#        candidate = Candidates.create(:party => party, :year => params["candidate_num"]["time(1i)"].to_i, :month => params["candidate_num"]["time(2i)"].to_i, :day => params["candidate_num"]["time(3i)"].to_i, :hour => params["candidate_num"]["time(4i)"].to_i, :minutes => params["candidate_num"]["time(5i)"].to_i, :point => 0)   
-#        p "-----------------------------"
-#        p candidate
-#        p "-----------------------------"
-       # members.each do |member|
-       #   user = Users.all(:name => member).first
-       #   Participates.create(:user => user, :candidate => candidate, :participation => 0)
-       #   Weights.create(:user => user, :party => party, :weight => 0, :admin => 0)
-       # end
       }
-        #        j = j + 1 
-      #else
- #       break
- #     end 
- #     @days = params[:candidates2]
-      render :action => "show"
+      redirect_to :action => "show", :params => {:message => "完了!"}
+    end
   end
 
   def show_detail

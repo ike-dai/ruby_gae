@@ -4,16 +4,18 @@
   <h1>飲み会調整</h1>
   <%= link_to('飲み会新規開催', :action => 'new') %>
   <br>
+  <div id=ok>
   <% if params[:message] %>
     <h3><%= params[:message] %></h3>
   <% end %>
+  </div>
   <h2>調整中の飲み会一覧</h2>
   <table class=table_list>
     <tr>
-      <td>飲み会タイトル</td>
-      <td>場所</td>
-      <td>詳細情報</td>
-      <td></td>
+      <th>飲み会タイトル</th>
+      <th>場所</th>
+      <th>詳細情報</th>
+      <th>操作</th>
     </tr>
     <% Parties.all.each do |party| %>
       <tr>

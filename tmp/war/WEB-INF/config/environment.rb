@@ -10,7 +10,7 @@ require 'lib/rails-2.3.2.jar'
 require 'lib/jruby-openssl-0.5.1.jar'
 #require 'lib/bumble_appengine_jruby'
 require 'lib/bumble'
-require 'lib/appengine-api.jar'
+#require 'lib/appengine-api.jar'
 require 'lib/beeu'
 
 require 'lib/appengine-apis-gems.jar'

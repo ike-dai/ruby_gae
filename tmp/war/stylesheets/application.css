@@ -39,6 +39,19 @@ table.table_list td.high {
     text-align: center;
     white-space: nowrap;  
 }
+
+#error {
+    background-color: #FFFAF0;
+    color: #FF3333;
+    font-size: 16pt;
+}
+
+#ok {
+    background-color: #9AFF9A;
+    color: #008B00;
+    font-size: 16pt;
+}
+
 #weight_high {
   background: #1B3AB4;
 }

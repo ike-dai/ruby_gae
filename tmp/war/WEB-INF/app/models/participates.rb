@@ -73,4 +73,21 @@ class Participates
       "<font color='blue' size='+2'>NG</font>"
     end
   end
+  
+  def ok_count participates
+    normal_count = 0
+    high_count = 0
+    participates.each do |participate|
+      if participate.participation == 1
+        if weight = Weights.all({:user_id => participate.user_id, :party_id => Candidates.get(participate.candidate_id).first.party_id}).weight != 1
+          high_count = high_count + 1
+        else
+          normal_count = normal_count + 1
+        end
+      end
+    end
+      normal = "参加者数：" + normal_count.to_s
+      high = "重要参加者数：" + high_count.to_s
+    return normal, high
+  end
 end
