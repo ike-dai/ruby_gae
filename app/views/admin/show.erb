@@ -4,18 +4,33 @@
   <h1>登録ユーザ一覧</h1>
   <%= link_to('新規ユーザ登録',:controller => 'admin', :action => 'new') %>
   <br>
-  <table class=table_list>
-      <tr>
-        <th>ユーザID</th>
-        <th>名前</th>
-      </tr>
+  <table class=table_tab>
+    <tr>
+      <th class=off>
+        <%= link_to('飲み会一覧',:controller => 'top', :action => 'show') %>
+      </th>
+      <th class=on>
+        ユーザ
+      </th>
+      <th></th>
+    </tr>
+    <tr>
+      <td colspan="3" class=tab>
+        <table class=table_list>
+          <tr>
+            <th>ユーザID</th>
+            <th>名前</th>
+          </tr>
 
-    <% Users.all.each do |user| %>
-      <tr>
-        <td><%= user.id %></td>
-        <td><%= user.name %></td>
-      </tr>
-    <% end %>
+          <% Users.all.each do |user| %>
+          <tr>
+            <td><%= user.id %></td>
+            <td><%= user.name %></td>
+          </tr>
+          <% end %>
+        </table>
+      </td>
+    </tr>
   </table>
 </html>
 

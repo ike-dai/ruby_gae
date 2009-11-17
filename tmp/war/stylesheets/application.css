@@ -1,10 +1,11 @@
 table.table_list {
     margin-top: 0.2em;
     margin-bottom: 1em;
-    width: 570px;
+    width: 100%;
     border-collapse: separate;
     border-spacing: 2px;
     font-size: 100%;
+    text-align: center;
 }
 
 table.table_list th,
@@ -39,6 +40,33 @@ table.table_list td.high {
     text-align: center;
     white-space: nowrap;  
 }
+
+table.table_tab {
+    width: 70%;
+    border: 1px white solid;
+}
+
+table.table_tab th.on {
+    width: 20%;
+    background: #FF8000;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+table.table_tab th.off {
+    width: 20%;
+    background: #C0C0C0;
+    text-align: center;
+}
+
+
+table.table_tab td.tab {
+    width: 100%;
+    background: #FF8000;
+    text-align: center;
+}
+
+
 
 #error {
     background-color: #FFFAF0;
