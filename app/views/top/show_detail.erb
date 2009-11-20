@@ -1,34 +1,46 @@
 <html>
   <%= stylesheet_link_tag "application.css" %>
-  <title>飲み会調整アプリ</title>
+  <%= render :partial => 'header' %>
   <%= javascript_include_tag :defaults %>
-  <h1>候補日詳細</h1>
-  <%= link_to('候補日一覧に戻る', :action => 'show') %>
-  <br>
-  <table class="table_list">
+  <h3></h3>
+  <table class=table_tab>
     <tr>
-      <th>日時</th>
-      <th>参加可能者数</th>
-      <% @participates.each do |participate| %>
-        <th class=name><%= participate.get_name %></th>
-      <% end %>
-      </tr>
+      <th class=off>
+        <%= link_to("飲み会一覧", :controller => 'top', :action => 'show') %>
+      </th>
+      <th class=off>
+        <%= link_to("ユーザ", :controller => 'admin', :action => 'show') %>
+      </th>
+      <th class=off>
+        <%= link_to("新規登録", :controller => 'top', :action => 'new') %>
+      </th>
+    </tr>
+    <tr>
+      <td class=tab colspan=3 align=center>
+        <table class="table_list" align=center>
+          <tr>
+            <th>日時</th>
+            <th>参加可能者数</th>
+            <% @participates.each do |participate| %>
+            <th class=name><%= participate.get_name %></th>
+            <% end %>
+          </tr>
 
-    <% @candidates.each do |candidate| %>
-      <tr>
-        <td><%= candidate.year %>/<%= candidate.month %>/<%= candidate.day %> <%= candidate.hour %>:<%= candidate.minutes %> </td>
-        <% participates = Participates.all({:candidate_id => candidate.key})%>
-        <td><% candidate.count(participates).each do |i| %>
-              <%= i %><br>
-             <% end %>
-          </td>
-        <% participates.each do |participate| %>
-          <% if Weights.all({:user_id => participate.user_id ,:party_id => candidate.party_id}).first.weight != 1 %>
+          <% @candidates.each do |candidate| %>
+          <tr>
+            <td><%= candidate.year %>/<%= candidate.month %>/<%= candidate.day %> <%= candidate.hour %>:<%= candidate.minutes %> </td>
+            <% participates = Participates.all({:candidate_id => candidate.key})%>
+            <td><% candidate.count(participates).each do |i| %>
+                <%= i %><br>
+                <% end %>
+            </td>
+            <% participates.each do |participate| %>
+            <% if Weights.all({:user_id => participate.user_id ,:party_id => candidate.party_id}).first.weight != 1 %>
             <td class=high>
-          <% else %>
+             <% else %>
             <td>
-          <% end %>
-           <div id="yes_or_no_<%=candidate.key%>_<%=participate.key%>"><%= participate.yes_or_no%></div><br>
+            <% end %>
+            <div id="yes_or_no_<%=candidate.key%>_<%=participate.key%>"><%= participate.yes_or_no%></div><br>
             <%= link_to_remote( "yes",
                 :update => "yes_or_no_#{candidate.key}_#{participate.key}",
                 :url => {:action => 'yes', :id => participate.key}) %>
@@ -36,10 +48,12 @@
                 :update => "yes_or_no_#{candidate.key}_#{participate.key}",
                 :url => {:action => 'no', :id => participate.key}) %>
             
-              </td>
-         <% end %>
+            </td>
+            <% end %>
 
-      </tr>
-    <% end %>
+          </tr>
+          <% end %>
+        </table>
+    </td>
   </table>
 </html>

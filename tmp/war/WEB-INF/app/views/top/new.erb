@@ -1,69 +1,70 @@
 <html>
   <%= stylesheet_link_tag "application.css" %> 
-  <title>新規飲み会開催登録</title>
+  <%= render :partial => 'header' %>
   <%= javascript_include_tag "prototype" %>
-  <h1>飲み会登録</h1>
-  <br>
   <div id=error>
-    <% if params[:message] %>
-      <%= params[:message] %>
-    <% end %>
+    <h3> <%= params[:message] %></h3>
   </div>
-  <% form_tag :action => 'add' do %>
-    飲み会名:<%= text_field('party','party_name') %>
-    <br>
-    <table border=2>
-      <tr>
-        <td>参加メンバー</td>
-        <td>候補日</td>
-      </tr>
-      <tr>
-        <td>
-          <table border=5>
-          <% for member in Users.all %>
-            <tr>
-              <td><%= check_box_tag('members[]', member.name, false ) %></td>
-              <td><%= member.name %></td>
-              <td>重要!<%= check_box_tag('weights[]', member.name, false ) %></td>
-            </tr>
-          <% end %>
-          </table>
-        </td>
-        <td>
-
-        <div id="candidate_div">
-    
-          <% name = 'candidates0' %> 
+  <table class=table_tab>
+    <tr>
+      <th class=off><%= link_to("飲み会一覧", :controller => "top", :action => "show") %></th>
+      <th class=off><%= link_to("ユーザ", :controller => "admin", :action => "show") %></th>
+      <th class=on>
+        <%= link_to("新規登録", :controller => "top", :action => "new") %>
+      </th>
+    </tr>
+    <tr>
+      <td class=tab colspan="3">
+        <% form_tag :action => 'add' do %>
+        飲み会名:<%= text_field('party','party_name') %>
         <br>
-        <%= datetime_select("#{name}",'time',
-                            { :start_year => Time.now.year,
-                              :end_year => Time.now.year+2,
-                              :use_month_numbers => true,
-                              :minute_steps => 15}
-                            )
-       %>                     
-       <br>
-       <%= link_to_remote("候補日追加",
-            :update => "candidate_div",
-            :url => { :action => :add_candidate, :count => $i },
-            :position => "before",
-#            :complete => "increment_count"
-            :complete => "countUp()" 
-                          )              
-        %>
-        
-        <%= #datetime_select('candidates2','time',
-            #                { :start_year => Time.now.year,
-            #                  :end_year => Time.now.year+2,
-            #                  :use_month_numbers => true,
-            #                  :minute_steps => 15}
-            #                )
-        %>
+        <table class=table_list align=center>
+          <tr>
+            <th>参加メンバー</td>
+            <th>候補日</td>
+          </tr>
+          <tr>
+            <td>
+              <table border=1 class=table_list>
+              <% for member in Users.all %>
+                <tr>
+                  <td><%= check_box_tag('members[]', member.name, false ) %></td>
+                  <td><%= member.name %></td>
+                  <td>重要!<%= check_box_tag('weights[]', member.name, false ) %></td>
+                </tr>
+              <% end %>
+              </table>
+            </td>
+            <td>
 
-        </div>
-        </td>
-      </tr>
-    </table> 
-     <%= submit_tag '追加' %>
-  <% end %>
+            <div id="candidate_div">
+    
+             <% name = 'candidates0' %> 
+              <br>
+              <%= datetime_select("#{name}",'time',
+                                  { :start_year => Time.now.year,
+                                    :end_year => Time.now.year+2,
+                                    :use_month_numbers => true,
+                                    :minute_steps => 15}
+                                  )
+              %>                     
+             <br>
+              <%= link_to_remote("候補日追加",
+                                  :update => "candidate_div",
+                                  :url => { :action => :add_candidate, :count => $i },
+                                  :position => "before",
+#             :complete => "increment_count"
+                                  :complete => "countUp()" 
+                                )              
+              %>
+        
+            </div>
+           </td>
+          </tr>
+        </table> 
+       <%= submit_tag '追加' %>
+     <% end %>
+   </td>
+ </tr>
+  </table>
 </html>  

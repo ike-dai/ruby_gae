@@ -76,7 +76,7 @@ class TopController < ApplicationController
   def add_candidate
     name = 'candidates' + $i.to_s
     $i = $i.to_i + 1
-    render :inline => "<br>" + "<%= datetime_select('#{name}','time',{ :start_year => Time.now.year, :end_year => Time.now.year+2, :use_month_numbers => true, :minute_steps => 15} ) %>"
+    render :inline => "<br><br>" + "<%= datetime_select('#{name}','time',{ :start_year => Time.now.year, :end_year => Time.now.year+2, :use_month_numbers => true, :minute_steps => 15} ) %>"
   end
 
   def input

@@ -1,30 +1,34 @@
 <html>
   <%= stylesheet_link_tag "application.css" %>
-  <title>ユーザ一覧</title>
-  <h1>登録ユーザ一覧</h1>
-  <%= link_to('新規ユーザ登録',:controller => 'admin', :action => 'new') %>
-  <br>
+  <%= render :partial => 'header' %>
+  <div id=ok>
+  <h3><%= params[:message] %></h3>
+  </div>
   <table class=table_tab>
     <tr>
       <th class=off>
         <%= link_to('飲み会一覧',:controller => 'top', :action => 'show') %>
       </th>
       <th class=on>
-        ユーザ
+        <%= link_to('ユーザ', :controller => 'admin', :action => 'show') %>
       </th>
-      <th></th>
+      <th class=off>
+        <%= link_to('新規登録', :controller => 'top', :action => 'new') %>
+      </th>
     </tr>
     <tr>
       <td colspan="3" class=tab>
-        <table class=table_list>
+     <% form_tag :action => 'add' do %>
+       名前:<%= text_field("data","name") %>
+       <%= submit_tag '追加' %>
+      <% end %>
+        <table class=table_user_list align=center>
           <tr>
-            <th>ユーザID</th>
             <th>名前</th>
           </tr>
 
           <% Users.all.each do |user| %>
           <tr>
-            <td><%= user.id %></td>
             <td><%= user.name %></td>
           </tr>
           <% end %>

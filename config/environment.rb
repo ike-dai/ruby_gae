@@ -14,7 +14,7 @@ require 'lib/bumble'
 require 'lib/beeu'
 
 require 'lib/appengine-apis-gems.jar'
-require 'will_paginate'
+#require 'will_paginate'
 begin
   require 'appengine-apis/local_boot'
   require 'appengine-apis/datastore'

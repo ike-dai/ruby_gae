@@ -1,34 +1,36 @@
 <html>
   <%= stylesheet_link_tag "application.css" %> 
-  <title>飲み会調整アプリ</title>
-  <h1>飲み会調整</h1>
-  <%= link_to('飲み会新規開催', :action => 'new') %>
-  <br>
+  <%= render :partial => 'header' %>
   <div id=ok>
-  <% if params[:message] %>
     <h3><%= params[:message] %></h3>
-  <% end %>
   </div>
   <table class=table_tab>
     <tr>
-      <th class=on>調整中の飲み会一覧</th>
-      <th class=off><%= link_to('ユーザ', :controller => 'admin', :action => 'show') %></th>
-      <th></th>
+      <th class=on>
+        <%= link_to('飲み会一覧', :controller => 'top', :action => 'show' ) %>
+      </th>
+      <th class=off>
+        <%= link_to('ユーザ', :controller => 'admin', :action => 'show') %>
+      </th>
+      <th class=off>
+        <%= link_to('新規登録', :controller => 'top', :action => 'new') %>
+      </th>
     </tr>
     <tr>
       <td colspan="3" class=tab>
-        <table class=table_list>
+        <table class=table_list align=center>
+          
         <tr>
           <th>飲み会タイトル</th>
           <th>場所</th>
           <th>詳細情報</th>
           <th>操作</th>
         </tr>
-        <% Parties.all.each do |party| %>
+        <% Parties.all().each do |party| %>
           <tr>
             <td><%= party.name %></td>
             <td><%= party.place %></td>
-            <td><%= link_to('詳細', :action => 'show_detail', :party_id => party) %></td>
+            <td><%= link_to('参加状況', :action => 'show_detail', :party_id => party) %></td>
             <td><%= link_to('削除', :action => 'party_delete', :party_id => party) %></td>
           </tr>
         <% end %>

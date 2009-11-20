@@ -1,11 +1,12 @@
 table.table_list {
     margin-top: 0.2em;
     margin-bottom: 1em;
-    width: 100%;
+    width: 80%;
     border-collapse: separate;
     border-spacing: 2px;
     font-size: 100%;
     text-align: center;
+    vertical-align: center;
 }
 
 table.table_list th,
@@ -48,21 +49,21 @@ table.table_tab {
 
 table.table_tab th.on {
     width: 20%;
-    background: #FF8000;
-    color: #FFFFFF;
+    background: #FFB2FF;
+    color: #00AAFF;
     text-align: center;
 }
 
 table.table_tab th.off {
     width: 20%;
-    background: #C0C0C0;
+    background: #D0D0D0;
     text-align: center;
 }
 
 
 table.table_tab td.tab {
     width: 100%;
-    background: #FF8000;
+    background: #FFB2FF;
     text-align: center;
 }
 
@@ -84,4 +85,48 @@ table.table_tab td.tab {
   background: #1B3AB4;
 }
 
+
+table.table_user_list {
+    margin-top: 0.2em;
+    margin-bottom: 1em;
+    width: 50%;
+    border-collapse: separate;
+    border-spacing: 2px;
+    font-size: 100%;
+    text-align: center;
+    vertical-align: center;
+}
+
+table.table_user_list th,
+table.table001 td {
+    padding: 4px 6px;
+}
+
+table.table_user_list th {
+    background: #1B3AB4;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 92%;
+    color: #FFF;
+}
+
+table.table_user_list th.name {
+    background: #C1FFC1;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 92%;
+    color: #000;
+}
+
+table.table_user_list td {
+    background: #F0FFFF;
+    text-align: center;
+    white-space: nowrap;  
+}
+
+table.table_user_list td.high {
+    background: #FFFAF0;
+    text-align: center;
+    white-space: nowrap;  
+}
 
