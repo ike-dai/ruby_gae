@@ -1,0 +1,22 @@
+<html>
+  <%= stylesheet_link_tag "application.css" %> 
+  <%= render :partial => 'header' %>
+  <div id=ok>
+    <h3><%= params[:message] %></h3>
+  </div>
+  <table class=table_tab>
+    <tr>
+      <th class=on>
+        <%= link_to('飲み会一覧', :controller => 'top', :action => 'show' ) %>
+      </th>
+      <th class=off>
+        <%= link_to('ユーザ', :controller => 'admin', :action => 'show') %>
+      </th>
+      <th class=off>
+        <%= link_to('新規登録', :controller => 'top', :action => 'new') %>
+      </th>
+    </tr>
+    <tr>
+    </tr>
+  </table>
+</html>

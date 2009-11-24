@@ -3,6 +3,9 @@ require 'cgi/session'
 class TopController < ApplicationController
   $i = 1
   WEIGHT_POINT = 5
+  def index
+  end
+
   def list
     render :action => "list"
   end
@@ -16,7 +19,14 @@ class TopController < ApplicationController
       redirect_to :action => "new", :params => {:message => "正しく入力してください!"}
     else
       @members = params[:members].first
-      party = Parties.create(:name => params[:party][:party_name], :place => "test")
+      party = Parties.create(:name => params[:party][:party_name])
+      if params[:party][:party_place].blank?
+        party.place = ""
+        party.save!
+      else
+        party.place = params[:party][:party_place]
+        party.save!
+      end
       j = 0
       candidate_num = 'candidates' + j.to_s
       params.each_pair{|key,value|

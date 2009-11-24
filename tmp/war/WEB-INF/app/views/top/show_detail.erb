@@ -1,7 +1,47 @@
 <html>
+  <head>
+              <script src="http://maps.google.com/maps?file=api&v=2.55&key=ABQIAAAAgWu7pS86aqdEUk0LvAMRuhRTKL_8Um8VLLKiW5jfLXmIyII17xSqoG0ZLJlFPZh1vtd0nWWgly6_vQ" type="text/javascript"></script>
+              <script type="text/javascript"> 
+              //<![CDATA[
+              var map = null;
+              var geocoder = null;
+              function load() {
+                if (GBrowserIsCompatible()) {
+                   map = new GMap2(document.getElementById("map"));
+                   map.setCenter(new GLatLng(35.660855,139.775264), 13);
+                   map.addControl(new GLargeMapControl());
+                   map.addControl(new GOverviewMapControl());
+                   map.addControl(new GMapTypeControl());
+                   geocoder = new GClientGeocoder();
+                }
+              }
+              function showAddress(address) {
+                if (geocoder) {
+                  geocoder.getLatLng(
+                    "田町",
+                    function(point) {
+                      if (!point) {
+                        alert("田町" +
+                        " \u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002");
+                      } else {
+                        map.setCenter(point, 13);
+                        var marker = new GMarker(point);
+                        map.addOverlay(marker);
+                        marker.openInfoWindowHtml("田町" + "(" + point.lat() + "," + point.lng() + ")");
+                      }
+                    }
+                  );
+                }
+              }
+              //]]>
+              </script> 
+
+
+  </head>
   <%= stylesheet_link_tag "application.css" %>
   <%= render :partial => 'header' %>
   <%= javascript_include_tag :defaults %>
+  <body onunload="AGUnload()" onload="load()">
   <h3></h3>
   <table class=table_tab>
     <tr>
@@ -15,8 +55,28 @@
         <%= link_to("新規登録", :controller => 'top', :action => 'new') %>
       </th>
     </tr>
-    <tr>
+    <tr> 
+      <% party = Parties.get(@candidates.first.party_id) %>
       <td class=tab colspan=3 align=center>
+        <table class="party_view">
+          <tr>
+            <th>飲み会情報</th>
+            <th>地図</th>
+          </tr>
+          <tr>
+            <td><%= party.name %></td>
+            <td rowspan="2">
+           <!-- <form onsubmit="showAddress(#{party.place}); return false">
+              <input type="text" value="test" name="address" size="60"/>
+              <input type="submit" value="Go!"/>-->
+              <div id="map" style="width:450px; height:280px; position: relative;">
+              </div>
+              <!--</form>-->
+            </td>
+          </tr>
+          <tr>
+            <td><%= party.place %></td>
+          </tr>
         <table class="table_list" align=center>
           <tr>
             <th>日時</th>
@@ -56,4 +116,5 @@
         </table>
     </td>
   </table>
+  </body>
 </html>

@@ -17,6 +17,7 @@
       <td class=tab colspan="3">
         <% form_tag :action => 'add' do %>
         飲み会名:<%= text_field('party','party_name') %>
+        開催場所：<%= text_field('party','party_place') %>
         <br>
         <table class=table_list align=center>
           <tr>
@@ -25,7 +26,7 @@
           </tr>
           <tr>
             <td>
-              <table border=1 class=table_list>
+              <table class=table_list align=center>
               <% for member in Users.all %>
                 <tr>
                   <td><%= check_box_tag('members[]', member.name, false ) %></td>
@@ -61,7 +62,7 @@
             </div>
            </td>
           </tr>
-        </table> 
+        </table>
        <%= submit_tag '追加' %>
      <% end %>
    </td>

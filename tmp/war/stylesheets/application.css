@@ -67,6 +67,11 @@ table.table_tab td.tab {
     text-align: center;
 }
 
+table.party_view td {
+    color: #0000FF;
+    font-size: 92%;
+    text-align: center;
+}
 
 
 #error {
